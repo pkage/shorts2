@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>shorts: <%= link.short %></title>
+
+        <link rel="stylesheet" type="text/css" href="/static/index.css"/>
+        <link rel="icon" href="/static/favicon.png"/>
+
+    </head>
+    <body>
+        <main>
+            <div class="header">
+                <a class="backbutton" href="/">
+                    <span>&lsaquo; back</span>
+                    <img src="/static/favicon.png" alt="shorts logo">
+                </a>
+                <div>
+                    <h1 style="margin: 0;">
+                        <a href="<%= link.original %>">/x/<%= link.short %></a>
+                    </h1>
+                    <small><%= link.original %></small>
+                </div>
+            </div>
+
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>user_agent</th>
+                        <th>time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (hits.length > 0) { %>
+                    <% hits.forEach(h => { %>
+                        <tr>
+                            <td>
+                                <%= h.human_agent %><br/>
+                                <small><%= h.user_agent %></small>
+                            </td>
+                            <td><code><%= h.human_date %></code></td>
+                        </tr>
+                    <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan=2><i>no hits yet.</i></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <details class="forms">
+                <summary>Options</summary>
+
+                <div class="cols">
+                    <div>
+                        <p>
+                            <a href="/delete/<%= link.short %>"><button type="button">delete permanently</button></a>
+                        </p>
+                    </div>
+                </div>
+            </details>
+        </main>
+    </body>
+</html>
+

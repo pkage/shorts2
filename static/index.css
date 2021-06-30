@@ -1,0 +1,142 @@
+:root {
+    --selection: #def;
+    --textcolor: #444;
+    --linkcolor: #2693ff;
+    --errorcolor: #e74c3c;
+}
+body {
+    color: var(--textcolor);
+    
+    font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+
+}
+
+@media (min-width: 768px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    main {
+        width: 70vw;
+    }
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.header > img {
+    height: 100px;
+    width: auto;
+
+    margin: 2em;
+}
+
+h1 > a {
+    color: var(--textcolor);
+    text-decoration: none;
+}
+
+h1 > a:hover {
+    color: var(--linkcolor);
+}
+
+th {
+    text-align: left;
+}
+
+
+.cols {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+.cols > * {
+    margin-left: 1em;
+}
+
+.cols.cols--even > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.forms {
+    margin: 2em 0;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+
+}
+
+form input {
+    margin-bottom: 5px;
+}
+
+form button {
+    align-self: flex-end;
+}
+
+table {
+    border: 0;
+    width: 100%;
+}
+
+table.loggedin tbody tr {
+    transition: background-color 0.1s cubic-bezier(0,0,0.3,1);
+    cursor: pointer;
+}
+
+table.loggedin tbody tr:hover {
+    background-color: var(--selection);
+}
+
+
+.backbutton {
+    position: relative;
+
+    margin: 2em;
+}
+
+.backbutton span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+
+    color: var(--textcolor);
+}
+
+.backbutton img {
+    width: 100px;
+    height: auto;
+
+    transition: opacity 0.2s cubic-bezier(0,0,0.3,1);
+}
+
+.backbutton:hover img {
+    opacity: 0.1;
+}
+
+a > button {
+    cursor: pointer;
+}
+
+.flashmessage {
+    color: var(--errorcolor);
+    margin-top: 0;
+}

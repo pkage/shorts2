@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>shorts</title>
+
+        <link rel="stylesheet" type="text/css" href="/static/index.css"/>
+        <link rel="icon" href="/static/favicon.png"/>
+
+    </head>
+    <body>
+        <main>
+            <div class="header">
+                <img src="/static/favicon.png" alt="shorts logo">
+                <h1>shorts</h1>
+            </div>
+            
+            <% messages.forEach(m => { %>
+                <p class="flashmessage"><%= m %></p>
+            <% }) %>
+
+            <table
+                <% if (user) { %>class="loggedin"<% } %>
+                cellspacing="0">
+                    <!--cellpadding="0">-->
+                <thead>
+                    <tr>
+                        <th>short</th>
+                        <th>original</th>
+                        <th>hits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% links.forEach(l => { %>
+                    <tr <% if (user) {%>data-short="/info/<%= l.short%>"<% } %> >
+                            <td><%= l.short %></td>
+                            <td><%= l.original %></td>
+                            <td><%= l.hits %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+
+
+            <% if (user === null) {%>
+                <details class="forms">
+                    <summary>Log in</summary>
+
+                    <div class="cols">
+                        <form action="/account/create" method="POST">
+                            <p>Register</p>
+                            <input type="email" name="email" placeholder="email" autocomplete="off"/>
+                            <input type="password" name="password" placeholder="password"/>
+                            <input type="text" name="invite" placeholder="invite" autocomplete="off"/>
+
+                            <button type="submit">submit</button>
+                        </form>
+                        <form action="/account/login" method="POST">
+                            <p>Log in</p>
+                            <input type="email" name="email" placeholder="email" autocomplete="off"/>
+                            <input type="password" name="password" placeholder="password"/>
+
+                            <button type="submit">submit</button>
+                        </form>
+                    </div>
+                </details>
+            <% } else { %>
+                <details class="forms">
+                    <summary>Logged in as <%= user.email %></summary>
+                    <div class="cols cols--even">
+
+                        <form action="/submit" method="POST">
+                            <p> New submission </p>
+
+                            <input type="text" name="short" placeholder="short" autocomplete="off"/>
+                            <input type="text" name="url" placeholder="url" autocomplete="off"/>
+
+                            <button type="submit">submit</button>
+                        </form>
+
+                        <div>
+                            <p>
+                                <a href="/account/logout">
+                                    <button type="button">Log out</button>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </details>
+            <% } %>
+        </main>
+
+        <% if (user) { %>
+        <script type="text/javascript">
+            document.querySelectorAll('tbody tr')
+                .forEach(el => {
+                    el.addEventListener('click', () => {
+                        location.href = el.dataset.short
+                    })
+                })
+        </script>
+        <% } %>
+    </body>
+</html>
